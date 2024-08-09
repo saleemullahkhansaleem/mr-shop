@@ -71,23 +71,25 @@ function ProductCard({ product }: ProductCardProps) {
         <Link href="" className="truncate block" title={product.title}>
           {product.title}
         </Link>
-        <div className="flex items-center my-2">
-          <Star className="w-4 h-4 text-yellow-500 me-1" fill="currentColor" />
-
-          <HoverCard>
-            <HoverCardTrigger>
+        <HoverCard>
+          <HoverCardTrigger>
+            <div className="flex items-center my-2">
+              <Star
+                className="w-4 h-4 text-yellow-500 me-1"
+                fill="currentColor"
+              />
               <div className="ms-1 text-sm font-bold text-primary hover:underline cursor-default">
                 {product.rating}{" "}
                 <span className="text-sm font-light text-muted-foreground">
                   ({product.reviews.length})
                 </span>
               </div>
-            </HoverCardTrigger>
-            <HoverCardContent>
-              <ReviewCard ratting={product.rating} reviews={product.reviews} />
-            </HoverCardContent>
-          </HoverCard>
-        </div>
+            </div>
+          </HoverCardTrigger>
+          <HoverCardContent>
+            <ReviewCard ratting={product.rating} reviews={product.reviews} />
+          </HoverCardContent>
+        </HoverCard>
         <div className="text-primary text-xl font-medium mb-4">
           <span className="text-sm align-top">$</span>
           {product.price.toFixed(2)}{" "}
@@ -95,7 +97,9 @@ function ProductCard({ product }: ProductCardProps) {
             -{product.discountPercentage}%
           </Badge>
         </div>
-        <Button className="w-full">Add to Cart</Button>
+        <Button size="sm" className="w-full">
+          Add to Cart
+        </Button>
       </div>
     </div>
   );
@@ -120,9 +124,9 @@ function ReviewCard({ ratting, reviews }: any) {
       <p className="text-sm font-medium text-muted-foreground">
         {reviews.length} global ratings
       </p>
-      {[1, 2, 3, 4, 5].map((item) => (
+      {[5, 4, 3, 2, 1].map((item) => (
         <div className="flex items-center mt-4" key={item}>
-          <p className="text-sm font-medium text-primary">{item} star</p>
+          <p className="text-sm font-medium text-primary whitespace-nowrap">{item} star</p>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded">
             <div
               className="h-5 bg-yellow-500 rounded"
