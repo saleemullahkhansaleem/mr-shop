@@ -5,6 +5,7 @@ import HeroSection from "./HeroSection";
 import CategoriesNavbar from "./CategoriesNavbar";
 import DrawerMenu from "./DrawerMenu";
 import { ThemeProvider } from "./ThemeProvider";
+import Products from "./Products";
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   CategoriesNavbar,
   DrawerMenu,
   ThemeProvider,
+  Products,
 };
