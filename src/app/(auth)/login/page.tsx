@@ -47,7 +47,7 @@ export default function Login() {
             Login
           </Button>
           <div className="text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
+            Do not have an account?{" "}
             <Link href="/register" className="underline" prefetch={false}>
               Register now
             </Link>
