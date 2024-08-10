@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer, Header, ThemeProvider } from "@/components/component";
-import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,11 +24,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            {children}
-            <Footer />
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

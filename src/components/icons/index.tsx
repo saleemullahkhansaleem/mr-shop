@@ -134,6 +134,63 @@ const UserIcon: React.FC<IconProps> = (props) => (
   </svg>
 );
 
+const UserPlusIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+    <line x1="20" y1="8" x2="20" y2="14" />
+    <line x1="23" y1="11" x2="17" y2="11" />
+  </svg>
+);
+
+const LoginIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M15 3H19a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+    <polyline points="10 17 15 12 10 7" />
+    <line x1="15" y1="12" x2="3" y2="12" />
+  </svg>
+);
+
+const RegisterIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M12 21v-6m0 0v-2a4 4 0 0 0-8 0v2m8 0H4m8 0a4 4 0 1 1 8 0v2m0-2v6" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+);
+
 const LogoutIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     {...props}
@@ -298,6 +355,79 @@ const MenuIcon: React.FC<IconProps> = (props) => (
   </svg>
 );
 
+const CreditCardIcon: React.FC<IconProps> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect width="20" height="14" x="2" y="5" rx="2" />
+    <line x1="2" x2="22" y1="10" y2="10" />
+  </svg>
+);
+
+const AddressIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 10c0 5.5-9 13-9 13s-9-7.5-9-13a9 9 0 1 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const PencilIcon: React.FC<IconProps> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+    <path d="m15 5 4 4" />
+  </svg>
+);
+
+const TrashIcon: React.FC<IconProps> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M3 6h18" />
+    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+  </svg>
+);
+
 // Products icons
 
 const ElectronicsIcon: React.FC<IconProps> = (props) => (
@@ -337,7 +467,7 @@ const ClothingIcon: React.FC<IconProps> = (props) => (
   </svg>
 );
 
-const HomeIcon: React.FC<IconProps> = (props) => (
+const HomeIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
@@ -350,8 +480,8 @@ const HomeIcon: React.FC<IconProps> = (props) => (
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    <path d="M3 9.5L12 4l9 5.5v8.5a2 2 0 0 1-2 2h-2v-7H7v7H5a2 2 0 0 1-2-2v-8.5z" />
-    <path d="M9 22V12h6v10" />
+    <path d="M3 9L12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
   </svg>
 );
 
@@ -509,6 +639,9 @@ export {
   ShoppingCartIcon,
   TwitterIcon,
   UserIcon,
+  UserPlusIcon,
+  LoginIcon,
+  RegisterIcon,
   LogoutIcon,
   OrdersIcon,
   SunIcon,
@@ -518,6 +651,10 @@ export {
   SearchIcon,
   Logo,
   MenuIcon,
+  CreditCardIcon,
+  AddressIcon,
+  PencilIcon,
+  TrashIcon,
   ElectronicsIcon,
   ClothingIcon,
   HomeIcon,

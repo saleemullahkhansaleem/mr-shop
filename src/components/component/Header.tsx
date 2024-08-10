@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { useState } from "react";
 import {
+  HomeIcon,
+  LoginIcon,
   LogoutIcon,
   OrdersIcon,
   SearchIcon,
   ShoppingCartIcon,
   UserIcon,
+  UserPlusIcon,
 } from "@/components/icons";
 import CategoriesNavbar from "./CategoriesNavbar";
 import DrawerMenu from "./DrawerMenu";
@@ -19,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 export default function Header() {
   return (
@@ -46,36 +48,6 @@ export default function Header() {
             </div>
           </div>
         </div>
-        <nav className="ml-auto hidden md:flex items-center gap-4 pl-4">
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline"
-            prefetch={false}
-          >
-            Home
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline"
-            prefetch={false}
-          >
-            Shop
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline"
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline"
-            prefetch={false}
-          >
-            Contact
-          </Link>
-        </nav>
         <div className="ml-0 sm:ml-4 md:ml-6 flex items-center gap-2">
           <Button
             variant="ghost"
@@ -107,38 +79,36 @@ function ProfileMenu() {
       <DropdownMenuContent align="end">
         {isLoggedIn ? (
           <>
-            <DropdownMenuItem>
-              <UserIcon className="h-4 w-4 mr-2" />
-              Profile
+            <DropdownMenuItem asChild>
+              <Link href="/profile" className="cursor-pointer" prefetch={false}>
+                <UserIcon className="h-4 w-4 mr-2" />
+                Profile
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <OrdersIcon className="h-4 w-4 mr-2" />
-              Orders
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <LogoutIcon className="h-4 w-4 mr-2" />
-              Logout
+            <DropdownMenuItem asChild>
+              <Link href="/logout" className="cursor-pointer" prefetch={false}>
+                <LogoutIcon className="h-4 w-4 mr-2" />
+                Logout
+              </Link>
             </DropdownMenuItem>
           </>
         ) : (
-          <div className="text-center">
-            <Button asChild size="sm">
-              <Link href="/login" prefetch={false}>
-                Login
+          <>
+            <DropdownMenuItem asChild>
+              <Link href="/login" className="cursor-pointer" prefetch={false}>
+                <LoginIcon className="h-4 w-4 mr-2" /> Login
               </Link>
-            </Button>{" "}
-            <br />
-            <p className="text-center text-sm text-muted-foreground p-2">
-              New customer{" "}
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link
                 href="/register"
-                className="underline hover:text-foreground"
+                className="cursor-pointer"
                 prefetch={false}
               >
-                start here
+                <UserPlusIcon className="h-4 w-4 mr-2" /> Register
               </Link>
-            </p>
-          </div>
+            </DropdownMenuItem>
+          </>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
