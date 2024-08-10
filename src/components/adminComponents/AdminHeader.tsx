@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { ThemeToggle } from "../component/ThemeToggle";
 
 export default function AdminHeader() {
   return (
@@ -32,6 +33,7 @@ export default function AdminHeader() {
             />
           </div>
         </form>
+        <ThemeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">

@@ -2,10 +2,8 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import {
-  HomeIcon,
   LoginIcon,
   LogoutIcon,
-  OrdersIcon,
   SearchIcon,
   ShoppingCartIcon,
   UserIcon,
@@ -13,7 +11,7 @@ import {
 } from "@/components/icons";
 import CategoriesNavbar from "./CategoriesNavbar";
 import DrawerMenu from "./DrawerMenu";
-import { ModeToggle } from "./ThemeToggle";
+import { ThemeToggle } from "./ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -59,7 +57,7 @@ export default function Header() {
             <span className="sr-only">Cart</span>
           </Button>
           <ProfileMenu />
-          <ModeToggle />
+          <ThemeToggle />
         </div>
       </div>
       <CategoriesNavbar />
