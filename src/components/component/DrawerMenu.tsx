@@ -32,33 +32,6 @@ export default function Component() {
       >
         <SheetTitle className="mb-2">Mr Shop</SheetTitle>
         <div className="flex flex-col gap-2">
-          <div>
-            <Separator className="md:hidden" />
-            <div className="flex justify-center md:hidden">
-              <Link
-                href="/"
-                className="py-2 px-4 transition-all hover:bg-muted"
-                prefetch={false}
-              >
-                Shop
-              </Link>
-              <Link
-                href="/"
-                className="py-2 px-4 transition-all hover:bg-muted"
-                prefetch={false}
-              >
-                About
-              </Link>
-              <Link
-                href="/"
-                className="py-2 px-4 transition-all hover:bg-muted"
-                prefetch={false}
-              >
-                Contact
-              </Link>
-            </div>
-            <Separator />
-          </div>
           <div className="relative flex-1 max-w-md sm:hidden">
             <Input
               type="search"

@@ -33,7 +33,7 @@ export default function Header() {
             <h1 className="uppercase font-extrabold text-xl sm:text-2xl">
               Mr Shop
             </h1>
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">Mr Shop</span>
           </Link>
           <div className="relative flex-1 max-w-md hidden sm:block">
             <Input

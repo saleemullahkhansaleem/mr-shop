@@ -1,4 +1,4 @@
-import SideNav from "./SideNav";
+import Sidebar from "./Sidebar";
 import AdminHeader from "./AdminHeader";
 
-export { SideNav, AdminHeader };
+export { Sidebar, AdminHeader };

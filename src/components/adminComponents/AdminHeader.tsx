@@ -1,4 +1,4 @@
-import { Package2Icon, SearchIcon } from "lucide-react";
+import { MenuIcon, Package2Icon, SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { Input } from "../ui/input";
 import {
@@ -11,14 +11,31 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { ThemeToggle } from "../component/ThemeToggle";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
+import SideNav from "./SideNav";
 
 export default function AdminHeader() {
   return (
     <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-muted/40 px-6">
-      <Link href="#" className="lg:hidden" prefetch={false}>
+      {/* <Link href="#" className="lg:hidden" prefetch={false}>
         <Package2Icon className="h-6 w-6" />
         <span className="sr-only">Home</span>
-      </Link>
+      </Link> */}
+      <Sheet>
+        <SheetTrigger className="lg:hidden" asChild>
+          <Button variant="ghost" size="icon" className="z-20 rounded-full">
+            <MenuIcon className="h-6 w-6" />
+            <span className="sr-only">Toggle navigation</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent
+          side="left"
+          className="w-64 bg-background p-4 overflow-y-scroll"
+        >
+          <SheetTitle className="mb-2">Mr Shop</SheetTitle>
+          <SideNav />
+        </SheetContent>
+      </Sheet>
       <div className="flex-1">
         <h1 className="font-semibold text-lg">Recent Orders</h1>
       </div>
@@ -54,7 +71,9 @@ export default function AdminHeader() {
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/admin">Logout</Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

@@ -1,10 +1,10 @@
-import { AdminHeader, SideNav } from "@/components/adminComponents";
+import { AdminHeader, Sidebar } from "@/components/adminComponents";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
-      <SideNav />
-      <div className="flex flex-col">
+    <div className="flex min-h-screen w-full overflow-hidden">
+      <Sidebar />
+      <div className="flex flex-col flex-1">
         <AdminHeader />
         {children}
       </div>
