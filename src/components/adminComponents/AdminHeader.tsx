@@ -16,11 +16,7 @@ import SideNav from "./SideNav";
 
 export default function AdminHeader() {
   return (
-    <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-muted/40 px-6">
-      {/* <Link href="#" className="lg:hidden" prefetch={false}>
-        <Package2Icon className="h-6 w-6" />
-        <span className="sr-only">Home</span>
-      </Link> */}
+    <header className="flex h-14 lg:h-[60px] items-center gap-2 md:gap-4 border-b bg-muted/40 px-2 md:px-6">
       <Sheet>
         <SheetTrigger className="lg:hidden" asChild>
           <Button variant="ghost" size="icon" className="z-20 rounded-full">
@@ -33,13 +29,13 @@ export default function AdminHeader() {
           className="w-64 bg-background p-4 overflow-y-scroll"
         >
           <SheetTitle className="mb-2">Mr Shop</SheetTitle>
-          <SideNav />
+          <SideNav withSheetClose />
         </SheetContent>
       </Sheet>
-      <div className="flex-1">
-        <h1 className="font-semibold text-lg">Recent Orders</h1>
+      <div className="sm:flex-1">
+        <h1 className="font-semibold text-lg">Orders</h1>
       </div>
-      <div className="flex flex-1 items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+      <div className="flex flex-1 items-center md:ml-auto gap-2 lg:gap-4">
         <form className="ml-auto flex-1 sm:flex-initial">
           <div className="relative">
             <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />

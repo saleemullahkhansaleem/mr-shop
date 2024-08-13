@@ -1,6 +1,5 @@
 import { Package2Icon } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "../ui/badge";
 import SideNav from "./SideNav";
 
 export default function Sidebar() {
