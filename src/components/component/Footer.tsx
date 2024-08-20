@@ -19,14 +19,14 @@ function Footer() {
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <nav className="space-y-2 flex flex-col">
             <Link
-              href="#"
+              href="/"
               className="text-sm font-medium hover:underline"
               prefetch={false}
             >
               Home
             </Link>
             <Link
-              href="#"
+              href="/shop"
               className="text-sm font-medium hover:underline"
               prefetch={false}
             >

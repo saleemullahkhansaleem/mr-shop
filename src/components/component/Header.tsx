@@ -52,9 +52,12 @@ export default function Header() {
             size="icon"
             className="rounded-full"
             title="Cart"
+            asChild
           >
-            <ShoppingCartIcon className="h-5 w-5" />
-            <span className="sr-only">Cart</span>
+            <Link href="/cart">
+              <ShoppingCartIcon className="h-5 w-5" />
+              <span className="sr-only">Cart</span>
+            </Link>
           </Button>
           <ProfileMenu />
           <ThemeToggle />
