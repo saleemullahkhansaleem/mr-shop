@@ -1,18 +1,10 @@
-import { MenuIcon, Package2Icon, SearchIcon } from "lucide-react";
-import Link from "next/link";
+import { MenuIcon, SearchIcon } from "lucide-react";
 import { Input } from "../ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { ThemeToggle } from "../component/ThemeToggle";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import SideNav from "./SideNav";
+import AdminProfileMenu from "./AdminProfileMenu";
 
 export default function AdminHeader() {
   return (
@@ -47,31 +39,7 @@ export default function AdminHeader() {
           </div>
         </form>
         <ThemeToggle />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <img
-                src="/placeholder.svg"
-                width="32"
-                height="32"
-                className="rounded-full"
-                alt="Avatar"
-                style={{ aspectRatio: "32/32", objectFit: "cover" }}
-              />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href="/admin">Logout</Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <AdminProfileMenu />
       </div>
     </header>
   );

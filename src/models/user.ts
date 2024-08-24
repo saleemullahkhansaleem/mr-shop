@@ -7,11 +7,29 @@ const userSchema = new Schema({
     unique: [true, "Email already exist"],
     required: [true, "Email required!"],
   },
+  phone: {
+    type: String,
+    unique: [true, "Phone number already exist"],
+    required: [true, "Phone number required!"],
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female", "other"],
+    required: [true, "Gender required!"],
+  },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
+  dob: {
+    type: String,
+    required: [true, "Date of birth required!"],
+  },
   password: {
     type: String,
     required: [true, "Password required!"],
   },
-  role: String,
 });
 
 export const User =

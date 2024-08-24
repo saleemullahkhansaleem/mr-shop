@@ -18,7 +18,7 @@ export const adminNavLinks = [
     id: 1,
     icon: HomeIcon,
     label: "Dashboard",
-    url: "/admin/dashboard",
+    url: "/admin",
     notifications: 4,
   },
   {
@@ -50,13 +50,13 @@ export const adminNavLinks = [
 ];
 export default function SideNav({ withSheetClose }: any) {
   const pathName = usePathname();
-  const [SheetCloseWrapper, shetCloseWrapperProps] = withSheetClose
+  const [SheetCloseWrapper, sheetCloseWrapperProps] = withSheetClose
     ? [SheetClose, { asChild: true }]
     : [React.Fragment, {}];
   return (
     <nav className="grid items-start text-sm font-medium">
       {adminNavLinks.map((link) => (
-        <SheetCloseWrapper {...shetCloseWrapperProps} key={link.id}>
+        <SheetCloseWrapper {...sheetCloseWrapperProps} key={link.id}>
           <Link
             key={link.id}
             href={link.url}

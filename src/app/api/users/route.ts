@@ -1,9 +1,11 @@
 import { connectDb } from "@/helper/db";
 import { User } from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 connectDb();
 
+// API to get all users
 export async function GET(request: NextRequest) {
   try {
     const users = await User.find();
@@ -21,13 +23,18 @@ export async function GET(request: NextRequest) {
   }
 }
 
+// API to create a user
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, password, role } = await request.json();
-    const user = await new User({ name, email, password, role }).save();
+    const { password, ...userData } = await request.json();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await new User({
+      password: hashedPassword,
+      ...userData,
+    }).save();
     return NextResponse.json({
       message: "User created successfully!",
-      succcess: true,
+      success: true,
       data: user,
     });
   } catch (error) {

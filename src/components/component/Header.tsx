@@ -1,25 +1,11 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import {
-  LoginIcon,
-  LogoutIcon,
-  SearchIcon,
-  ShoppingCartIcon,
-  UserIcon,
-  UserPlusIcon,
-} from "@/components/icons";
 import CategoriesNavbar from "./CategoriesNavbar";
 import DrawerMenu from "./DrawerMenu";
 import { ThemeToggle } from "./ThemeToggle";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-
-const isLoggedIn = true;
+import { SearchIcon, ShoppingCartIcon } from "lucide-react";
+import ProfileMenu from "./ProfileMenu";
 
 export default function Header() {
   return (
@@ -29,7 +15,7 @@ export default function Header() {
           <DrawerMenu />
         </div>
         <div className="flex items-center flex-1">
-          <Link href="/" className="mr-4 md:mr-6" prefetch={false}>
+          <Link href="/" className="sm:mr-4 md:mr-6" prefetch={false}>
             <h1 className="uppercase font-extrabold text-xl sm:text-2xl">
               Mr Shop
             </h1>
@@ -47,6 +33,7 @@ export default function Header() {
           </div>
         </div>
         <div className="ml-0 sm:ml-4 md:ml-6 flex items-center gap-2">
+          <ThemeToggle />
           <Button
             variant="ghost"
             size="icon"
@@ -60,58 +47,9 @@ export default function Header() {
             </Link>
           </Button>
           <ProfileMenu />
-          <ThemeToggle />
         </div>
       </div>
       <CategoriesNavbar />
     </header>
-  );
-}
-
-function ProfileMenu() {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <UserIcon className="h-5 w-5" />
-          <span className="sr-only">Account</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        {isLoggedIn ? (
-          <>
-            <DropdownMenuItem asChild>
-              <Link href="/profile" className="cursor-pointer" prefetch={false}>
-                <UserIcon className="h-4 w-4 mr-2" />
-                Profile
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/logout" className="cursor-pointer" prefetch={false}>
-                <LogoutIcon className="h-4 w-4 mr-2" />
-                Logout
-              </Link>
-            </DropdownMenuItem>
-          </>
-        ) : (
-          <>
-            <DropdownMenuItem asChild>
-              <Link href="/login" className="cursor-pointer" prefetch={false}>
-                <LoginIcon className="h-4 w-4 mr-2" /> Login
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link
-                href="/register"
-                className="cursor-pointer"
-                prefetch={false}
-              >
-                <UserPlusIcon className="h-4 w-4 mr-2" /> Register
-              </Link>
-            </DropdownMenuItem>
-          </>
-        )}
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 }

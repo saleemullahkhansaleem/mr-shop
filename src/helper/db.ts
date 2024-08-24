@@ -1,4 +1,3 @@
-import { User } from "@/models/user";
 import mongoose from "mongoose";
 export const connectDb = async () => {
   try {
@@ -7,14 +6,6 @@ export const connectDb = async () => {
     });
     console.log("DB connected");
     console.log("DB connected to host: ", connection.host);
-
-    //user testing
-    // new User({
-    //   name: "Saleem",
-    //   email: "saleem@gmail.com",
-    //   password: "123456",
-    //   role: "user",
-    // }).save();
   } catch (error) {
     console.log("DB connection faild");
     console.log(error);

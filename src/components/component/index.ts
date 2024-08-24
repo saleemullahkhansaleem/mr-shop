@@ -7,6 +7,8 @@ import DrawerMenu from "./DrawerMenu";
 import { ThemeProvider } from "./ThemeProvider";
 import Products from "./Products";
 import Spinner from "./Spinner";
+import Logout from "./Logout";
+import ProfileMenu from "./ProfileMenu";
 
 export {
   Header,
@@ -18,4 +20,6 @@ export {
   ThemeProvider,
   Products,
   Spinner,
+  Logout,
+  ProfileMenu,
 };

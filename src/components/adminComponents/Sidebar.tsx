@@ -8,12 +8,13 @@ export default function Sidebar() {
       <div className="flex flex-col gap-2">
         <div className="flex h-[60px] items-center px-2">
           <Link
-            href="#"
+            href="admin"
             className="flex items-center gap-2 font-semibold"
             prefetch={false}
           >
-            <Package2Icon className="h-6 w-6" />
-            <span className="">Acme Inc</span>
+            <h1 className="uppercase font-extrabold text-xl sm:text-2xl">
+              Mr Shop
+            </h1>
           </Link>
         </div>
         <div className="flex-1">
