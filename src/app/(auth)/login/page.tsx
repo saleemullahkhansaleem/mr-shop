@@ -60,7 +60,7 @@ export default function Login() {
     setLoading(true);
     try {
       const data = values;
-      let response = await postRequest("login", data);
+      let response = await postRequest("/api/login", data);
       if (response.success) {
         setCookie("user", JSON.stringify(response.data), {
           maxAge: 60 * 60 * 24 * 7,

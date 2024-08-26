@@ -72,7 +72,7 @@ export default function Register() {
     try {
       setLoading(true);
       const { passwordConfirm, ...data } = values;
-      let response = await postRequest("users", data);
+      let response = await postRequest("/api/users", data);
       if (response.success) {
         router.replace("/login");
         toast({

@@ -1,8 +1,6 @@
-const host = "http://localhost:3051/api/";
-
 export async function postRequest(endPoint: string, data: any) {
   try {
-    let response: any = await fetch(`${host}${endPoint}`, {
+    let response: any = await fetch(endPoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
