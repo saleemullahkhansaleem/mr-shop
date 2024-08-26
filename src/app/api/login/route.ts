@@ -1,5 +1,8 @@
+import { connectDb } from "@/helper/db";
 import { User } from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
+
+connectDb();
 
 export async function POST(request: NextRequest) {
   const bcrypt = require("bcryptjs");

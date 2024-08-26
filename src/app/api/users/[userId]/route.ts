@@ -1,5 +1,8 @@
+import { connectDb } from "@/helper/db";
 import { User } from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
+
+connectDb();
 
 export async function GET(request: NextRequest, { params }: any) {
   const { userId } = params;
@@ -29,7 +32,7 @@ export async function PUT(request: NextRequest, { params }: any) {
   const { userId } = params;
   const data = await request.json();
   try {
-    const user = await User.findByIdAndUpdate(userId, data  );
+    const user = await User.findByIdAndUpdate(userId, data);
     return NextResponse.json({
       success: true,
       data: user,
