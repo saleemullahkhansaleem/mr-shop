@@ -38,6 +38,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import Link from "next/link";
 
 export default function AdminProductsPage() {
   interface Filters {
@@ -301,7 +302,9 @@ export default function AdminProductsPage() {
           <CardHeader className="flex-row justify-between">
             <CardTitle>Products</CardTitle>
             <CardDescription>
-              <Button size="sm">Add Product</Button>
+              <Button size="sm" asChild>
+                <Link href="/admin/add-product">Add Product</Link>
+              </Button>
             </CardDescription>
           </CardHeader>
           <CardContent>
