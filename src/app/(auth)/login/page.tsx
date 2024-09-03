@@ -27,6 +27,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { setCookie } from "cookies-next";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/features/userSlice";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -41,12 +43,11 @@ type user = {
 };
 
 export default function Login() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [user, setUser] = useState<user>();
-  console.log("user", user);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -62,10 +63,19 @@ export default function Login() {
       const data = values;
       let response = await postRequest("/api/login", data);
       if (response.success) {
-        setCookie("user", JSON.stringify(response.data), {
+        setCookie("role", JSON.stringify(response.data.role), {
           maxAge: 60 * 60 * 24 * 7,
         });
-        setUser(response.data);
+        dispatch(
+          setUser({
+            id: response.data.id,
+            email: response.data.email,
+            name: response.data.name,
+            phone: response.data.phone,
+            role: response.data.role,
+            isLoggedIn: true,
+          })
+        );
         if (response.data.role === "admin") {
           router.replace("/admin");
         } else {

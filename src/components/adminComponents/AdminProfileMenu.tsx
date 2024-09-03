@@ -13,30 +13,18 @@ import {
 } from "../ui/dropdown-menu";
 import { Settings, Store } from "lucide-react";
 import { Logout } from "../component";
-import { useEffect, useState } from "react";
-import { getCookie } from "cookies-next";
-import { userType } from "../component/ProfileMenu";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function AdminProfileMenu() {
-  const [user, setUser] = useState<userType | null>(null);
-
-  const userCookie = getCookie("user");
-  useEffect(() => {
-    if (userCookie) {
-      try {
-        const parsedUser = JSON.parse(userCookie as string) as userType;
-        setUser(parsedUser);
-      } catch (error) {
-        console.error("Failed to parse user cookie:", error);
-      }
-    }
-  }, [userCookie]);
+  const user = useSelector((state: any) => state.user);
+  useEffect(() => {}, []);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src="/placeholder1.svg" alt="Admin profile" />
+          {/* <AvatarImage src="/placeholder.svg" alt="Admin profile" /> */}
           <AvatarFallback className="text-sm">
             {user?.name.slice(0, 2).toUpperCase()}
           </AvatarFallback>

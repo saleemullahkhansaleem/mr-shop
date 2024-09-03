@@ -23,7 +23,7 @@ const userSchema = new Schema({
     default: "user",
   },
   dob: {
-    type: String,
+    type: String, 
     required: [true, "Date of birth required!"],
   },
   password: {

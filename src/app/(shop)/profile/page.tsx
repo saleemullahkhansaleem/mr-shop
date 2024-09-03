@@ -1,5 +1,4 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
@@ -16,32 +15,21 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  AddressIcon,
   CreditCardIcon,
-  OrdersIcon,
-  RightIcon,
-  SettingIcon,
   TrashIcon,
-} from "@/components/icons";
-import { PencilIcon } from "lucide-react";
+  PencilIcon,
+  SettingsIcon,
+  ChevronRightIcon,
+} from "lucide-react";
+import { AddressIcon, OrdersIcon } from "@/components/icons";
+import { ProfileHeader } from "@/components/component";
 
 export default function Profile() {
   return (
     <main className="container min-h-dvh">
       <Tabs defaultValue="orders">
         <div className="flex flex-col items-center">
-          <header className="p-4 flex items-center">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-16 w-16">
-                <AvatarImage src="/placeholder-user.jpg" alt="@shadcn" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-0.5">
-                <div className="font-semibold">John Doe</div>
-                <div className="text-sm text-muted-foreground">@johndoe</div>
-              </div>
-            </div>
-          </header>
+          <ProfileHeader />
           <TabsList className="mx-auto">
             <TabsTrigger value="orders" className="gap-2">
               <OrdersIcon className="w-4 h-4" />{" "}
@@ -56,7 +44,7 @@ export default function Profile() {
               <span className="hidden sm:block">Payment Methods</span>
             </TabsTrigger>
             <TabsTrigger value="settings" className="gap-2">
-              <SettingIcon className="w-4 h-4" />{" "}
+              <SettingsIcon className="w-4 h-4" />{" "}
               <span className="hidden sm:block">Settings</span>
             </TabsTrigger>
           </TabsList>
@@ -86,7 +74,7 @@ export default function Profile() {
                       <TableCell>$99.00</TableCell>
                       <TableCell>
                         <Button variant="outline" size="icon">
-                          <RightIcon className="h-4 w-4" />
+                          <ChevronRightIcon className="h-4 w-4" />
                           <span className="sr-only">View Order</span>
                         </Button>
                       </TableCell>
@@ -98,7 +86,7 @@ export default function Profile() {
                       <TableCell>$49.00</TableCell>
                       <TableCell>
                         <Button variant="outline" size="icon">
-                          <RightIcon className="h-4 w-4" />
+                          <ChevronRightIcon className="h-4 w-4" />
                           <span className="sr-only">View Order</span>
                         </Button>
                       </TableCell>
@@ -110,7 +98,7 @@ export default function Profile() {
                       <TableCell>$149.00</TableCell>
                       <TableCell>
                         <Button variant="outline" size="icon">
-                          <RightIcon className="h-4 w-4" />
+                          <ChevronRightIcon className="h-4 w-4" />
                           <span className="sr-only">View Order</span>
                         </Button>
                       </TableCell>

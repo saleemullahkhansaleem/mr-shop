@@ -2,11 +2,12 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const tokenCookie = request.cookies.get("user");
-  const token = tokenCookie?.value;
+  const token = request.cookies.get("token")?.value;
 
-  const user = token ? JSON.parse(token as unknown as string) : null;
-  const isAdmin = user?.role === "admin";
+  const isAdmin = token
+    ? JSON.parse(request.cookies.get("role")?.value || "") === "admin"
+    : false ;
+  console.log("admin", isAdmin);
 
   if (
     token &&

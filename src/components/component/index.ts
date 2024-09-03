@@ -9,6 +9,8 @@ import Products from "./Products";
 import Spinner from "./Spinner";
 import Logout from "./Logout";
 import ProfileMenu from "./ProfileMenu";
+import StoreProvider from "./StoreProvider";
+import ProfileHeader from "./profile/ProfileHeader";
 
 export {
   Header,
@@ -22,4 +24,6 @@ export {
   Spinner,
   Logout,
   ProfileMenu,
+  StoreProvider,
+  ProfileHeader,
 };

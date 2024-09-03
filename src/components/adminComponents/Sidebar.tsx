@@ -1,4 +1,3 @@
-import { Package2Icon } from "lucide-react";
 import Link from "next/link";
 import SideNav from "./SideNav";
 
@@ -6,7 +5,8 @@ export default function Sidebar() {
   return (
     <div className="hidden border-r bg-muted/40 lg:block w-64 px-4">
       <div className="flex flex-col gap-2">
-        <div className="flex h-[60px] items-center px-2">
+        <div className="flex h-[60px] items-center px-2 relative">
+          <div className="h-[59px] w-[1px] absolute top-0 -right-[17px] bg-background/60"></div>
           <Link
             href="admin"
             className="flex items-center gap-2 font-semibold"

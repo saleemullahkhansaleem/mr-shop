@@ -17,42 +17,22 @@ import {
 } from "../ui/dropdown-menu";
 import Link from "next/link";
 import Logout from "./Logout";
-import { getCookie } from "cookies-next";
 import { Separator } from "../ui/separator";
-import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
-export type userType = {
-  id: string;
-  email: string;
-  name: string;
-  phone: string;
-  role: string;
-};
 export default function ProfileMenu() {
-  const [user, setUser] = useState<userType | null>(null);
-
-  const userCookie = getCookie("user");
-  useEffect(() => {
-    if (userCookie) {
-      try {
-        const parsedUser = JSON.parse(userCookie as string) as userType;
-        setUser(parsedUser);
-      } catch (error) {
-        console.error("Failed to parse user cookie:", error);
-      }
-    }
-  }, [userCookie]);
-
-  const isLoggedIn = Boolean(userCookie);
+  const user = useSelector((state: RootState) => state.user);
+  console.log("user: ", user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {isLoggedIn ? (
+        {user?.isLoggedIn ? (
           <Avatar className="cursor-pointer">
-            <AvatarImage src="/placeholder1.svg" alt="Admin profile" />
+            {/* <AvatarImage src="/placeholder.svg" alt="Admin profile" /> */}
             <AvatarFallback className="text-sm">
-              {user?.name.slice(0, 2).toUpperCase()}
+              {user?.name?.slice(0, 2).toUpperCase() || "NA"}
             </AvatarFallback>
           </Avatar>
         ) : (
@@ -68,7 +48,7 @@ export default function ProfileMenu() {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {isLoggedIn ? (
+        {user?.isLoggedIn ? (
           <>
             <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
             <Separator />

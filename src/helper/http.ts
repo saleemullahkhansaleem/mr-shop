@@ -1,4 +1,4 @@
-export async function postRequest(endPoint: string, data: any) {
+export async function postRequest(endPoint: string, data?: any) {
   try {
     let response: any = await fetch(endPoint, {
       method: "POST",

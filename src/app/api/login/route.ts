@@ -1,6 +1,7 @@
 import { connectDb } from "@/helper/db";
 import { User } from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 connectDb();
 
@@ -19,6 +20,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Validate password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return NextResponse.json({
@@ -27,7 +29,21 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({
+    // Generate JWT
+    const secretKey = process.env.JWT_SECRET;
+
+    if (!secretKey) {
+      throw new Error("JWT_SECRET is not defined in the environment variables");
+    }
+
+    const token = jwt.sign(
+      { id: user._id, email: user.email, role: user.role },
+      secretKey, // Secret key from your .env file
+      { expiresIn: "1h" } // Token expiration time
+    );
+
+    // Set the JWT as an HttpOnly cookie
+    const response = NextResponse.json({
       success: true,
       data: {
         id: user._id,
@@ -35,9 +51,17 @@ export async function POST(request: NextRequest) {
         name: user.name,
         phone: user.phone,
         role: user.role,
-        // You can include a JWT or session token here if you implement sessions
       },
     });
+
+    response.cookies.set("token", token, {
+      httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
+      secure: process.env.NODE_ENV === "production", // Send cookie over HTTPS only in production
+      maxAge: 60 * 60 * 24 * 7, // 1 hour in seconds
+      path: "/", // Cookie will be accessible across the entire app
+    });
+
+    return response;
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json({
