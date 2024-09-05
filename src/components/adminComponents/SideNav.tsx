@@ -2,6 +2,7 @@
 
 import {
   HomeIcon,
+  LayoutGrid,
   PackageIcon,
   SettingsIcon,
   ShoppingCartIcon,
@@ -29,20 +30,26 @@ export const adminNavLinks = [
   },
   {
     id: 3,
+    icon: LayoutGrid,
+    label: "Categories",
+    url: "/admin/categories",
+  },
+  {
+    id: 4,
     icon: PackageIcon,
     label: "Products",
     url: "/admin/products",
     notifications: 10,
   },
   {
-    id: 4,
+    id: 5,
     icon: UsersIcon,
     label: "Customers",
     url: "/admin/customers",
     notifications: 2,
   },
   {
-    id: 5,
+    id: 6,
     icon: SettingsIcon,
     label: "Settings",
     url: "/admin/settings",

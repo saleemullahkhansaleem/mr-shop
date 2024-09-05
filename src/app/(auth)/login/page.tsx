@@ -35,15 +35,8 @@ const formSchema = z.object({
   password: z.string().min(6),
 });
 
-type user = {
-  id: string;
-  email: string;
-  name: string;
-  phone: string;
-};
-
 export default function Login() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);

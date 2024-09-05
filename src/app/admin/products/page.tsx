@@ -144,7 +144,7 @@ export default function AdminProductsPage() {
     totalRevenue /
     filteredProducts.reduce((count, product) => count + product.inStock, 0);
   return (
-    <div className="grid gap-6 p-4 md:p-6">
+    <main className="container grid gap-6 p-4 md:p-6">
       <div className="grid md:grid-cols-3 gap-4">
         <Card>
           <CardHeader>
@@ -298,7 +298,7 @@ export default function AdminProductsPage() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <Card>
+        <Card className="overflow-x-auto">
           <CardHeader className="flex-row justify-between">
             <CardTitle>Products</CardTitle>
             <CardDescription>
@@ -373,6 +373,6 @@ export default function AdminProductsPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </main>
   );
 }
