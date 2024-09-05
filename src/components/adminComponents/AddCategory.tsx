@@ -1,5 +1,5 @@
 "use client";
-import { Label } from "@/components/ui/label";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -24,14 +24,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "../ui/button";
 
-export default function AddCategory() {
+export default function AddCategory({
+  categoryData,
+}: {
+  categoryData?: z.infer<typeof categorySchema>;
+}) {
   const form = useForm<z.infer<typeof categorySchema>>({
     resolver: zodResolver(categorySchema),
     defaultValues: {
-      name: "",
-      description: "",
-      isSubCategory: false,
-      parentCategory: "",
+      name: categoryData?.name || "",
+      description: categoryData?.description || "",
+      isSubCategory: categoryData?.isSubCategory || false,
+      parentCategory: categoryData?.parentCategory || "",
     },
   });
 
@@ -95,29 +99,31 @@ export default function AddCategory() {
             );
           }}
         />
-        {isSubCategory && <FormField
-          control={form.control}
-          name="parentCategory"
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>Parent Category</FormLabel>
-                <Select onValueChange={field.onChange}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select parent category" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="personal">Personal</SelectItem>
-                    <SelectItem value="company">Company</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            );
-          }}
-        />}
+        {isSubCategory && (
+          <FormField
+            control={form.control}
+            name="parentCategory"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Parent Category</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select parent category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="personal">Personal</SelectItem>
+                      <SelectItem value="company">Company</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+        )}
         <div className="text-end">
           <Button type="submit">Save Category</Button>
         </div>

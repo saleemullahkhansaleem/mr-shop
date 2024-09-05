@@ -42,6 +42,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { z } from "zod";
+import { categorySchema } from "@/schema";
 
 export default function CategoriesPage() {
   const [search, setSearch] = useState("");
@@ -320,7 +322,13 @@ export default function CategoriesPage() {
                     {category.title}
                   </CardTitle>
                 </div>
-                <CatAction />
+                <CatAction
+                  categoryData={{
+                    name: category.title,
+                    description: category.description,
+                    isSubCategory: false,
+                  }}
+                />
               </div>
 
               <CardDescription className="">
@@ -339,7 +347,14 @@ export default function CategoriesPage() {
                         </div>
                         <p>{subcategory.title}</p>
                       </div>
-                      <CatAction />
+                      <CatAction
+                        categoryData={{
+                          name: subcategory.title,
+                          description: subcategory.description,
+                          isSubCategory: true,
+                          parentCategory: category.title,
+                        }}
+                      />
                     </li>
                     <div className="mt-4 text-xs text-muted-foreground">
                       <div className="mb-2">
@@ -357,7 +372,11 @@ export default function CategoriesPage() {
   );
 }
 
-function CatAction() {
+function CatAction({
+  categoryData,
+}: {
+  categoryData?: z.infer<typeof categorySchema>;
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -385,7 +404,7 @@ function CatAction() {
                   Fill out the form to create a new category.
                 </DialogDescription>
               </DialogHeader>
-              <AddCategory />
+              <AddCategory categoryData={categoryData} />
             </DialogContent>
           </Dialog>
         </DropdownMenuItem>
@@ -404,10 +423,7 @@ function CatAction() {
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
                 <DialogTitle>Confirm Delete Category</DialogTitle>
-                <DialogDescription>
-                  {/* Type <span className="font-bold">"Category name"</span> below
-                  to confirm */}
-                </DialogDescription>
+                <DialogDescription></DialogDescription>
               </DialogHeader>
               <form className="space-y-4">
                 <div className="space-y-2">

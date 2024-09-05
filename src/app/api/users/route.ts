@@ -1,5 +1,5 @@
 import { connectDb } from "@/helper/db";
-import { User } from "@/models/userSchema";
+import { User } from "@/models/model.userSchema";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
