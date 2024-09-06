@@ -11,6 +11,7 @@ import Logout from "./Logout";
 import ProfileMenu from "./ProfileMenu";
 import StoreProvider from "./StoreProvider";
 import ProfileHeader from "./profile/ProfileHeader";
+import IconLucide from "./IconLucide";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   ProfileMenu,
   StoreProvider,
   ProfileHeader,
+  IconLucide,
 };

@@ -4,4 +4,10 @@ import AdminHeader from "./AdminHeader";
 import AdminProfileMenu from "./AdminProfileMenu";
 import AddCategory from "./AddCategory";
 
-export { Sidebar, AdminHeader, AdminProfileMenu, SideNav, AddCategory };
+export {
+  Sidebar,
+  AdminHeader,
+  AdminProfileMenu,
+  SideNav,
+  AddCategory,
+};

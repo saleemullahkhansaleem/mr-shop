@@ -2,11 +2,16 @@ import { z } from "zod";
 
 export const categorySchema = z
   .object({
-    name: z.string().min(3, { message: "Category name is required." }),
+    name: z.string().min(1, { message: "Category name is required." }),
+    iconName: z.string().min(1, { message: "Icon name is required." }),
     description: z
       .string()
-      .min(8, { message: "Category description is required." })
-      .max(400, { message: "Category description is required." }),
+      .min(8, {
+        message: "Category description must be at least 8 characters long.",
+      })
+      .max(400, {
+        message: "Category description must be less than 400 characters long.",
+      }),
     isSubCategory: z.boolean(),
     parentCategory: z.string().optional(),
   })

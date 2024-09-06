@@ -23,28 +23,100 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "../ui/button";
+import { getRequest, postRequest } from "@/helper/http";
+import { useRouter } from "next/navigation";
+import { useToast } from "../ui/use-toast";
+import { useEffect, useState } from "react";
+import { Spinner } from "../component";
 
 export default function AddCategory({
   categoryData,
+  toggleDialog,
+  fetch,
 }: {
   categoryData?: z.infer<typeof categorySchema>;
+  toggleDialog: () => void;
+  fetch: () => void;
 }) {
+  const { toast } = useToast();
+  type Category = {
+    _id: string;
+    name: string;
+    id: string;
+  };
+
+  const [parentCat, setParentCat] = useState<Category[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof categorySchema>>({
     resolver: zodResolver(categorySchema),
     defaultValues: {
       name: categoryData?.name || "",
+      iconName: categoryData?.iconName || "",
       description: categoryData?.description || "",
       isSubCategory: categoryData?.isSubCategory || false,
       parentCategory: categoryData?.parentCategory || "",
     },
   });
-
   const isSubCategory = form.watch("isSubCategory");
 
-  const handleSubmit = (values: z.infer<typeof categorySchema>) => {
-    console.log("Values: ", values);
+  useEffect(() => {
+    fetchParentCat();
+  }, []);
+
+  const fetchParentCat = async () => {
+    try {
+      let response = await getRequest("/api/category/parent");
+      if (response.success) {
+        setParentCat(response.data);
+      } else {
+        console.log("Failed to get parent categories");
+      }
+    } catch (error) {
+      console.log("Error in getting parent categories: ", error);
+    }
   };
-  return (
+
+  const handleSubmit = async (values: z.infer<typeof categorySchema>) => {
+    if (categoryData) {
+      console.log("Values: ", values);
+    } else {
+      try {
+        setLoading(true);
+        const { isSubCategory, parentCategory, ...rest } = values;
+        const data = isSubCategory ? values : { ...rest, isSubCategory: false };
+        let response = await postRequest("/api/category", data);
+        if (response.success) {
+          router.replace("/admin/categories");
+          toast({
+            description: "Category created successfully",
+          });
+          toggleDialog();
+          fetch();
+        } else {
+          toast({
+            title: "Category creation failed",
+            description: response.message,
+            variant: "destructive",
+          });
+        }
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        toast({
+          title: "Error!",
+          description: "Some thing went wrong",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+  return loading ? (
+    <div className="flex justify-center w-full">
+      <Spinner />
+    </div>
+  ) : (
     <Form {...form}>
       <form className="grid gap-4" onSubmit={form.handleSubmit(handleSubmit)}>
         <FormField
@@ -57,6 +129,25 @@ export default function AddCategory({
                 <FormControl>
                   <Input
                     placeholder="Enter category name"
+                    type="text"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          control={form.control}
+          name="iconName"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Icon Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter lucide icon name"
                     type="text"
                     {...field}
                   />
@@ -114,8 +205,15 @@ export default function AddCategory({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="personal">Personal</SelectItem>
-                      <SelectItem value="company">Company</SelectItem>
+                      {parentCat.length === 0 ? (
+                        <SelectItem value="">No category found!</SelectItem>
+                      ) : (
+                        parentCat?.map((cat, i) => (
+                          <SelectItem key={i} value={cat._id}>
+                            {cat.name}
+                          </SelectItem>
+                        ))
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />
