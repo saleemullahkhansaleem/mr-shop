@@ -385,7 +385,7 @@ export default function CategoriesPage() {
                             iconName: "subcategory.icon",
                             description: subcategory.description,
                             isSubCategory: true,
-                            parentCategory: category.name,
+                            parentCategory: category._id.toString(),
                           }}
                           toggleDialog={toggleDialog}
                           fetch={fetchCat}

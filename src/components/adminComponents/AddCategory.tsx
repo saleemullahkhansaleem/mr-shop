@@ -206,7 +206,7 @@ export default function AddCategory({
                     </FormControl>
                     <SelectContent>
                       {parentCat.length === 0 ? (
-                        <SelectItem value="">No category found!</SelectItem>
+                        <></>
                       ) : (
                         parentCat?.map((cat, i) => (
                           <SelectItem key={i} value={cat._id}>
