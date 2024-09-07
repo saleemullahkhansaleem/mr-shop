@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { postRequest } from "@/helper/http";
+import { api } from "@/helper/http";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -36,7 +36,7 @@ const formSchema = z.object({
 });
 
 export default function Login() {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,7 +54,7 @@ export default function Login() {
     setLoading(true);
     try {
       const data = values;
-      let response = await postRequest("/api/login", data);
+      let response = await api.post("/api/login", data);
       if (response.success) {
         setCookie("role", JSON.stringify(response.data.role), {
           maxAge: 60 * 60 * 24 * 7,

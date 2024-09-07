@@ -23,7 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { postRequest } from "@/helper/http";
+import { api } from "@/helper/http";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/component";
@@ -71,7 +71,7 @@ export default function Register() {
     try {
       setLoading(true);
       const { passwordConfirm, ...data } = values;
-      let response = await postRequest("/api/users", data);
+      let response = await api.post("/api/users", data);
       if (response.success) {
         router.replace("/login");
         toast({
