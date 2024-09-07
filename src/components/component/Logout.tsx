@@ -3,7 +3,7 @@ import { deleteCookie } from "cookies-next";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
 import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { postRequest } from "@/helper/http";
+import { api } from "@/helper/http";
 import { useToast } from "../ui/use-toast";
 
 export default function Logout() {
@@ -11,7 +11,7 @@ export default function Logout() {
   const { toast } = useToast();
   const handleLogout = async () => {
     try {
-      const response = await postRequest("/api/logout");
+      const response = await api.get("/api/logout");
       if (response.success) {
         deleteCookie("token");
         deleteCookie("role");
