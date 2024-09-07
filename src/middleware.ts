@@ -6,8 +6,7 @@ export function middleware(request: NextRequest) {
 
   const isAdmin = token
     ? JSON.parse(request.cookies.get("role")?.value || "") === "admin"
-    : false ;
-  console.log("admin", isAdmin);
+    : false;
 
   if (
     token &&
