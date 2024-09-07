@@ -7,6 +7,7 @@ import DrawerMenu from "./DrawerMenu";
 import { ThemeProvider } from "./ThemeProvider";
 import Products from "./Products";
 import Spinner from "./Spinner";
+import SpinnerMini from "./SpinnerMini";
 import Logout from "./Logout";
 import ProfileMenu from "./ProfileMenu";
 import StoreProvider from "./StoreProvider";
@@ -23,6 +24,7 @@ export {
   ThemeProvider,
   Products,
   Spinner,
+  SpinnerMini,
   Logout,
   ProfileMenu,
   StoreProvider,

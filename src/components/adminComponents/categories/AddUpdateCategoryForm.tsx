@@ -17,26 +17,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
+} from "../../ui/form";
 import { categorySchema } from "@/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "../ui/button";
-import { getRequest, postRequest } from "@/helper/http";
+import { Button } from "../../ui/button";
+import { api } from "@/helper/http";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import { useEffect, useState } from "react";
-import { Spinner } from "../component";
+import { Spinner } from "../../component";
 
-export default function AddCategory({
+export default function AddUpdateCategoryForm({
   categoryData,
   toggleDialog,
-  fetch,
 }: {
   categoryData?: z.infer<typeof categorySchema>;
   toggleDialog: () => void;
-  fetch: () => void;
 }) {
   const { toast } = useToast();
   type Category = {
@@ -67,9 +65,9 @@ export default function AddCategory({
 
   const fetchParentCat = async () => {
     try {
-      let response = await getRequest("/api/category/parent");
+      let response = await api.get("/api/category/parent");
       if (response.success) {
-        setParentCat(response.data);
+        setParentCat(response?.data);
       } else {
         console.log("Failed to get parent categories");
       }
@@ -79,25 +77,48 @@ export default function AddCategory({
   };
 
   const handleSubmit = async (values: z.infer<typeof categorySchema>) => {
+    const { isSubCategory, parentCategory, ...rest } = values;
+    const data = isSubCategory ? values : { ...rest, isSubCategory: false };
     if (categoryData) {
-      console.log("Values: ", values);
+      setLoading(true);
+      try {
+        let response = await api.put(
+          `/api/category/${categoryData?._id}`,
+          data
+        );
+        if (response.success) {
+          router.replace("/admin/categories/");
+          toast({
+            description: "Category updated successfully",
+          });
+          toggleDialog();
+        } else {
+          toast({
+            title: "Error",
+            description: "Failed to update category",
+            variant: "destructive",
+          });
+          console.log("Failed to update category");
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log("Error in updating categories: ", error);
+        setLoading(false);
+      }
     } else {
       try {
         setLoading(true);
-        const { isSubCategory, parentCategory, ...rest } = values;
-        const data = isSubCategory ? values : { ...rest, isSubCategory: false };
-        let response = await postRequest("/api/category", data);
+        let response = await api.post("/api/category", data);
         if (response.success) {
-          router.replace("/admin/categories");
+          router.replace("/admin/categories/");
           toast({
             description: "Category created successfully",
           });
           toggleDialog();
-          fetch();
         } else {
           toast({
-            title: "Category creation failed",
-            description: response.message,
+            title: "Error",
+            description: "Category creation failed",
             variant: "destructive",
           });
         }
