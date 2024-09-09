@@ -1,21 +1,29 @@
 import { connectDb } from "@/helper/db";
 import { Category } from "@/models/model.productSchema";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 connectDb();
 
-// Fetch all parent categories with only name and _id fields
+// Fetch all parent categories with only name fields
 export async function GET() {
   try {
     const categories = await Category.find({ isSubCategory: false }).select(
       "name"
     );
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       message: "Categories fetched successfully!",
       success: true,
       data: categories,
     });
+
+    // Add cache control headers to prevent caching
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate"
+    );
+
+    return response;
   } catch (error) {
     console.log(error);
     return NextResponse.json({
