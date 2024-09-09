@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import ProductCard from "./ProductCard";
 import HeroSection from "./HeroSection";
 import CategoriesNavbar from "./CategoriesNavbar";
-import DrawerMenu from "./DrawerMenu";
+import DrawerMenu from "./CategoriesMenuMobile";
 import { ThemeProvider } from "./ThemeProvider";
 import Products from "./Products";
 import Spinner from "./Spinner";

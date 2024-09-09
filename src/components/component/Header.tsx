@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import CategoriesNavbar from "./CategoriesNavbar";
-import DrawerMenu from "./DrawerMenu";
+import CategoriesMenuMobile from "./CategoriesMenuMobile";
 import { ThemeToggle } from "./ThemeToggle";
 import { SearchIcon, ShoppingCartIcon } from "lucide-react";
 import ProfileMenu from "./ProfileMenu";
@@ -12,7 +12,7 @@ export default function Header() {
     <header className="bg-background border-b shadow-sm sticky top-0 z-40">
       <div className="container px-1 sm:px-4 md:px-6 flex items-center h-12 md:h-14">
         <div className="block xl:hidden mr-2">
-          <DrawerMenu />
+          <CategoriesMenuMobile />
         </div>
         <div className="flex items-center flex-1">
           <Link href="/" className="sm:mr-4 md:mr-6" prefetch={false}>
