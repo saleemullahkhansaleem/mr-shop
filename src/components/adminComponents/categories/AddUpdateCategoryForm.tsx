@@ -40,7 +40,7 @@ export default function AddUpdateCategoryForm({
   type Category = {
     _id: string;
     name: string;
-    id: string;
+    slug: string;
   };
 
   const [parentCat, setParentCat] = useState<Category[]>([]);
@@ -51,12 +51,27 @@ export default function AddUpdateCategoryForm({
     resolver: zodResolver(categorySchema),
     defaultValues: {
       name: categoryData?.name || "",
-      iconName: categoryData?.iconName || "",
+      slug: categoryData?.slug || "",
+      iconName: categoryData?.iconName || "CircleSlash",
       description: categoryData?.description || "",
       isSubCategory: categoryData?.isSubCategory || false,
       parentCategory: categoryData?.parentCategory || "",
     },
   });
+
+  const { watch, setValue } = form;
+  const name = watch("name");
+
+  useEffect(() => {
+    if (name && !categoryData) {
+      const slug = name
+        .toLowerCase()
+        .replace(/[^a-z0-9-]/g, " ") // Remove any characters that are not alphanumeric or dashes
+        .replace(/\s+/g, "-"); // Replace spaces with dashes
+      setValue("slug", slug);
+    }
+  }, [name, setValue]);
+
   const isSubCategory = form.watch("isSubCategory");
 
   useEffect(() => {
@@ -150,6 +165,25 @@ export default function AddUpdateCategoryForm({
                 <FormControl>
                   <Input
                     placeholder="Enter category name"
+                    type="text"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          control={form.control}
+          name="slug"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Category Slug</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Slug auto-generated from category name"
                     type="text"
                     {...field}
                   />

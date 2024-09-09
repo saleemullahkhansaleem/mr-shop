@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -7,7 +6,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { EllipsisVertical, Trash } from "lucide-react";
+import { EllipsisVertical, Plus } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -21,15 +20,6 @@ import {
   DeleteCategory,
   SearchCategories,
 } from "@/components/adminComponents";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { z } from "zod";
 import { categorySchema } from "@/schema";
 import { IconLucide } from "@/components/component";
@@ -61,6 +51,7 @@ export default async function CategoriesPage({
   interface Category {
     _id: number;
     name: string;
+    slug: string;
     iconName: IconName;
     description: string;
     subCategories?: Category[];
@@ -77,41 +68,42 @@ export default async function CategoriesPage({
   );
 
   return (
-    <main className="container grid gap-6 p-4 md:p-6">
+    <main className="relative container grid gap-6 p-4 md:p-6">
       <div className="flex items-center gap-4">
         <SearchCategories searchParams={searchParams} />
-        <AddUpdateCategory
-        // fetch={fetchCategories}
-        />
+        <AddUpdateCategory />
       </div>
       {
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredCategories.map((category: Category) => (
             <Card key={category._id}>
               <CardHeader>
                 <div className="flex flex-row items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="rounded-full min-w-12 h-12 bg-muted flex items-center justify-center">
+                    <div className="rounded min-w-12 h-12 bg-muted flex items-center justify-center">
                       <IconLucide iconName={category.iconName} />
                     </div>
-                    <CardTitle className="text-lg font-bold">
+                    <CardTitle className="text-lg font-medium tracking-normal">
                       {category.name}
+                      <p className="text-xs text-muted-foreground">
+                        /{category.slug}
+                      </p>
                     </CardTitle>
                   </div>
                   <CatAction
                     categoryData={{
                       _id: category._id,
                       name: category.name,
+                      slug: category.slug,
                       iconName: category.iconName,
                       description: category.description,
                       isSubCategory: false,
                     }}
-                    // fetch={fetchCategories}
                   />
                 </div>
 
-                <CardDescription className="">
-                  {category.description}
+                <CardDescription>
+                  {category.description} <br />{" "}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -121,24 +113,29 @@ export default async function CategoriesPage({
                       <Separator className="w-11/12 mx-auto" />
                       <li className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="rounded-full w-8 h-8 bg-muted flex items-center justify-center">
+                          <div className="rounded w-8 h-8 bg-muted flex items-center justify-center">
                             <IconLucide
                               iconName={subcategory.iconName}
                               className="w-4"
                             />
                           </div>
-                          <p>{subcategory.name}</p>
+                          <div>
+                            <p>{subcategory.name}</p>
+                            <p className="text-[10px] text-muted-foreground">
+                              /{subcategory.slug}
+                            </p>
+                          </div>
                         </div>
                         <CatAction
                           categoryData={{
                             _id: subcategory._id,
                             name: subcategory.name,
+                            slug: subcategory.slug,
                             iconName: subcategory.iconName,
                             description: subcategory.description,
                             isSubCategory: true,
                             parentCategory: category._id.toString(),
                           }}
-                          // fetch={fetchCategories}
                         />
                       </li>
                       <div className="mt-4 text-xs text-muted-foreground">

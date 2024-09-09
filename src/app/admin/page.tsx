@@ -15,7 +15,7 @@ export default function Dashboard() {
   return (
     <main className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4 md:p-6">
       <Card>
-        <CardHeader className="flex items-center justify-between">
+        <CardHeader className="flex-row items-center justify-between space-y-0">
           <CardTitle>Total Sales</CardTitle>
           <DollarSignIcon className="h-5 w-5 text-muted-foreground" />
         </CardHeader>
@@ -25,7 +25,7 @@ export default function Dashboard() {
         </CardContent>
       </Card>
       <Card>
-        <CardHeader className="flex items-center justify-between">
+        <CardHeader className="flex-row items-center justify-between space-y-0">
           <CardTitle>New Customers</CardTitle>
           <UsersIcon className="h-5 w-5 text-muted-foreground" />
         </CardHeader>
@@ -35,7 +35,7 @@ export default function Dashboard() {
         </CardContent>
       </Card>
       <Card>
-        <CardHeader className="flex items-center justify-between">
+        <CardHeader className="flex-row items-center justify-between space-y-0">
           <CardTitle>Average Order Value</CardTitle>
           <DollarSignIcon className="h-5 w-5 text-muted-foreground" />
         </CardHeader>

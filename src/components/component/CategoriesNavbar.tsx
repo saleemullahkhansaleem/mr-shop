@@ -1,7 +1,4 @@
-"use client";
-
 import * as React from "react";
-import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import {
@@ -11,57 +8,43 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Logo } from "../icons";
-import { categories } from "@/data";
+import { api } from "@/helper/http";
+import IconLucide, { IconName } from "./IconLucide";
 
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
+async function fetchCategories() {
+  try {
+    const response = await api.get("/api/category");
+    if (response?.success) {
+      return response.data;
+    } else {
+      console.log("Failed to get categories");
+      return [];
+    }
+  } catch (error) {
+    console.log("Error in getting categories: ", error);
+    return [];
+  }
+}
 
-export default function CategoriesNavbar() {
+interface Category {
+  _id: number;
+  name: string;
+  slug: string;
+  iconName: IconName;
+  description: string;
+  subCategories?: Category[];
+}
+
+export default async function CategoriesNavbar() {
+  const categories = await fetchCategories();
   return (
     <div className="container px-4 md:px-6 hidden xl:flex">
       <NavigationMenu>
         <NavigationMenuList>
-          {categories.map((item, index: number) => (
+          {categories.map((category: Category, index: number) => (
             <NavigationMenuItem key={index}>
-              <NavigationMenuTrigger>{item.name}</NavigationMenuTrigger>
+              <NavigationMenuTrigger>{category.name}</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[1200px] lg:grid-cols-[.5fr_1fr]">
                   <li className="row-span-3">
@@ -70,27 +53,30 @@ export default function CategoriesNavbar() {
                         className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                         href="/"
                       >
-                        <item.icon className="h-16 w-16" />
+                        <IconLucide
+                          className="h-16 w-16"
+                          iconName={category.iconName}
+                        />
                         <div className="mb-2 mt-4 text-lg font-medium">
-                          {item.title}
+                          {category.name}
                         </div>
-                        {/* <p className="text-sm leading-tight text-muted-foreground">
-                            Beautifully designed components that you can copy and
-                            paste into your apps. Accessible. Customizable. Open
-                            Source.
-                        </p> */}
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          {category.description}
+                        </p>
                       </a>
                     </NavigationMenuLink>
                   </li>
-                  {item.subcategories.map((subItem, index: number) => (
-                    <ListItem
-                      href={subItem.url}
-                      title={subItem.name}
-                      key={index}
-                    >
-                      {subItem.title}
-                    </ListItem>
-                  ))}
+                  {category.subCategories?.map(
+                    (subItem: Category, index: number) => (
+                      <ListItem
+                        href={subItem.slug}
+                        title={subItem.name}
+                        key={index}
+                      >
+                        {subItem.description}
+                      </ListItem>
+                    )
+                  )}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>

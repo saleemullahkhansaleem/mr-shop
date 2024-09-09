@@ -8,7 +8,7 @@ connectDb();
 export async function GET() {
   try {
     const categories = await Category.find({ isSubCategory: false }).select(
-      "name"
+      "name iconName"
     );
 
     return NextResponse.json(

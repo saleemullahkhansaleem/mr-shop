@@ -6,6 +6,8 @@ import AddUpdateCategoryForm from "./categories/AddUpdateCategoryForm";
 import AddUpdateCategory from "./categories/AddUpdateCategory";
 import SearchCategories from "./categories/SearchCategories";
 import DeleteCategory from "./categories/DeleteCategory";
+import RefreshButton from "./RefreshButton";
+import AdminPageTitle from "./AdminPageTitle";
 
 export {
   Sidebar,
@@ -16,4 +18,6 @@ export {
   AddUpdateCategory,
   SearchCategories,
   DeleteCategory,
+  RefreshButton,
+  AdminPageTitle,
 };

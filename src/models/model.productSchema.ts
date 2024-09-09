@@ -48,7 +48,8 @@ export const Review =
 const categorySchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
-    iconName: { type: String, required: true },
+    slug: { type: String, unique: true },
+    iconName: { type: String, default: "CircleSlash" },
     description: { type: String },
     isSubCategory: { type: Boolean, default: false },
     parentCategory: { type: Schema.Types.ObjectId, ref: "Category" },

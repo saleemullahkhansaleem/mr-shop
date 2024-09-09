@@ -8,7 +8,7 @@ export default function Sidebar() {
         <div className="flex h-[60px] items-center px-2 relative">
           <div className="h-[59px] w-[1px] absolute top-0 -right-[17px] bg-background/60"></div>
           <Link
-            href="admin"
+            href="/admin"
             className="flex items-center gap-2 font-semibold"
             prefetch={false}
           >

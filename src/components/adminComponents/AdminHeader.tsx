@@ -1,10 +1,11 @@
-import { MenuIcon, SearchIcon } from "lucide-react";
-import { Input } from "../ui/input";
+import { MenuIcon, RotateCw } from "lucide-react";
 import { Button } from "../ui/button";
 import { ThemeToggle } from "../component/ThemeToggle";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import SideNav from "./SideNav";
 import AdminProfileMenu from "./AdminProfileMenu";
+import RefreshButton from "./RefreshButton";
+import AdminPageTitle from "./AdminPageTitle";
 
 export default function AdminHeader() {
   return (
@@ -25,20 +26,11 @@ export default function AdminHeader() {
             <SideNav withSheetClose />
           </SheetContent>
         </Sheet>
-        <div className="sm:flex-1">
-          <h1 className="font-semibold text-lg">Orders</h1>
+        <div className="flex-1 flex items-center gap-4">
+          <AdminPageTitle />
+          <RefreshButton />
         </div>
-        <div className="flex flex-1 items-center md:ml-auto gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
-            <div className="relative">
-              <SearchIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search orders..."
-                className="pl-10 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-              />
-            </div>
-          </form>
+        <div className="flex items-center md:ml-auto gap-2 lg:gap-4">
           <ThemeToggle />
           <AdminProfileMenu />
         </div>

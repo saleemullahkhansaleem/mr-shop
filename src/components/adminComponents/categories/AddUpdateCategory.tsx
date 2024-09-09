@@ -13,7 +13,7 @@ import AddUpdateCategoryForm from "./AddUpdateCategoryForm";
 import { useState } from "react";
 import { z } from "zod";
 import { categorySchema } from "@/schema";
-import { Edit } from "lucide-react";
+import { Edit, Plus } from "lucide-react";
 
 export default function AddUpdateCategory({
   categoryData,
@@ -31,7 +31,13 @@ export default function AddUpdateCategory({
             Edit
           </Button>
         ) : (
-          <Button> Add New Category</Button>
+          <Button
+            className="fixed bottom-4 right-4 md:right-8"
+            size="icon"
+            variant="outline"
+          >
+            <Plus />
+          </Button>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md overflow-auto max-h-screen">

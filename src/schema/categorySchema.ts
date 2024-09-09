@@ -4,7 +4,8 @@ export const categorySchema = z
   .object({
     _id: z.number().optional(),
     name: z.string().min(1, { message: "Category name is required." }),
-    iconName: z.string().min(1, { message: "Icon name is required." }),
+    slug: z.string().optional(),
+    iconName: z.string().default("CircleSlash"),
     description: z
       .string()
       .min(8, {
