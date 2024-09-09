@@ -87,7 +87,7 @@ export default function AddUpdateCategoryForm({
           data
         );
         if (response.success) {
-          router.replace("/admin/categories/");
+          router.refresh();
           toast({
             description: "Category updated successfully",
           });
@@ -110,7 +110,7 @@ export default function AddUpdateCategoryForm({
         setLoading(true);
         let response = await api.post("/api/category", data);
         if (response.success) {
-          router.replace("/admin/categories/");
+          router.refresh();
           toast({
             description: "Category created successfully",
           });

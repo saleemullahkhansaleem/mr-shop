@@ -63,7 +63,7 @@ export default function DeleteCategory({
     try {
       let response = await api.delete(`/api/category/${categoryData?._id}`);
       if (response.success) {
-        router.replace("/admin/categories/");
+        router.refresh();
         toast({
           description: "Category deleted successfully",
         });
