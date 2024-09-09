@@ -11,19 +11,18 @@ export async function GET() {
       "name"
     );
 
-    const response = NextResponse.json({
-      message: "Categories fetched successfully!",
-      success: true,
-      data: categories,
-    });
-
-    // Add cache control headers to prevent caching
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate"
+    return NextResponse.json(
+      {
+        message: "Categories fetched successfully!",
+        success: true,
+        data: categories,
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store", // Prevent server-side caching
+        },
+      }
     );
-
-    return response;
   } catch (error) {
     console.log(error);
     return NextResponse.json({
