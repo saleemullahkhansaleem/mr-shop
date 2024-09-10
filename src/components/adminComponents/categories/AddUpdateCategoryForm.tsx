@@ -76,7 +76,7 @@ export default function AddUpdateCategoryForm({
 
   useEffect(() => {
     fetchParentCat();
-  }, []);
+  }, [loading]);
 
   const fetchParentCat = async () => {
     try {

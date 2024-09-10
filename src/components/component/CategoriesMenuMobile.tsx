@@ -53,26 +53,16 @@ export default async function CategoriesMenuMobile() {
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="w-64 bg-background p-4 overflow-y-scroll"
+        className="w-64 bg-background p-4 overflow-y-auto"
       >
         <SheetTitle className="mb-2">Mr Shop</SheetTitle>
         <div className="flex flex-col gap-2">
-          <div className="relative flex-1 max-w-md sm:hidden">
-            <Input
-              type="search"
-              placeholder="Search products..."
-              className="w-full bg-muted pl-10 pr-4 rounded-md h-auto"
-            />
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground dark:text-muted-foreground-dark">
-              <SearchIcon className="h-4 w-4" />
-            </div>
-          </div>
           {categories.map((category: Category, index: number) =>
             !category.subCategories ? (
               <Link
                 key={index}
                 href={category.slug}
-                className="flex items-center gap-3 rounded-lg py-1  transition-all hover:text-primary"
+                className="flex items-center gap-3 rounded py-1  transition-all hover:text-primary"
                 prefetch={false}
               >
                 <Logo className="h-4 w-4" />
@@ -80,7 +70,7 @@ export default async function CategoriesMenuMobile() {
               </Link>
             ) : (
               <Collapsible key={index}>
-                <CollapsibleTrigger className="flex items-center gap-3 rounded-lg py-1 text-primary w-full transition-all hover:text-primary">
+                <CollapsibleTrigger className="flex items-center gap-3 rounded py-1 text-primary w-full transition-all hover:text-primary">
                   {category.iconName && (
                     <IconLucide
                       className="h-5 w-5"
@@ -109,7 +99,6 @@ export default async function CategoriesMenuMobile() {
               </Collapsible>
             )
           )}
-          <Separator />
         </div>
       </SheetContent>
     </Sheet>
