@@ -32,9 +32,11 @@ import { Spinner } from "../../component";
 export default function AddUpdateCategoryForm({
   categoryData,
   toggleDialog,
+  parentCategories,
 }: {
   categoryData?: z.infer<typeof categorySchema>;
   toggleDialog: () => void;
+  parentCategories: { name: string; _id: number }[];
 }) {
   const { toast } = useToast();
   type Category = {
@@ -263,8 +265,8 @@ export default function AddUpdateCategoryForm({
                       {parentCat.length === 0 ? (
                         <></>
                       ) : (
-                        parentCat?.map((cat, i) => (
-                          <SelectItem key={i} value={cat._id}>
+                        parentCategories?.map((cat, i) => (
+                          <SelectItem key={cat._id} value={cat._id?.toString()}>
                             {cat.name}
                           </SelectItem>
                         ))

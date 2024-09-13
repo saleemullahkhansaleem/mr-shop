@@ -58,7 +58,10 @@ export default async function CategoriesPage({
   }
 
   const categories = await fetchCategories();
-  const parentCategories = categories.map((cat: Category) => cat.name);
+  const parentCategories = categories.map((cat: Category) => ({
+    name: cat.name,
+    _id: cat._id,
+  }));
   console.log("parent categories: ", parentCategories);
 
   const filteredCategories = categories?.filter(
@@ -73,7 +76,7 @@ export default async function CategoriesPage({
     <main className="relative container grid gap-6 p-4 md:p-6">
       <div className="flex items-center gap-4">
         <SearchCategories searchParams={searchParams} />
-        <AddUpdateCategory />
+        <AddUpdateCategory parentCategories={parentCategories} />
       </div>
       {
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -93,6 +96,7 @@ export default async function CategoriesPage({
                     </CardTitle>
                   </div>
                   <CatAction
+                    parentCategories={parentCategories}
                     categoryData={{
                       _id: category._id,
                       name: category.name,
@@ -129,6 +133,7 @@ export default async function CategoriesPage({
                           </div>
                         </div>
                         <CatAction
+                          parentCategories={parentCategories}
                           categoryData={{
                             _id: subcategory._id,
                             name: subcategory.name,
@@ -159,8 +164,10 @@ export default async function CategoriesPage({
 
 function CatAction({
   categoryData,
+  parentCategories,
 }: {
   categoryData?: z.infer<typeof categorySchema>;
+  parentCategories: { name: string; _id: number }[];
 }) {
   return (
     <DropdownMenu>
@@ -171,7 +178,10 @@ function CatAction({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="space-y-1">
         <DropdownMenuItem asChild>
-          <AddUpdateCategory categoryData={categoryData} />
+          <AddUpdateCategory
+            categoryData={categoryData}
+            parentCategories={parentCategories}
+          />
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <DeleteCategory categoryData={categoryData} />

@@ -17,8 +17,10 @@ import { Edit, Plus } from "lucide-react";
 
 export default function AddUpdateCategory({
   categoryData,
+  parentCategories,
 }: {
   categoryData?: z.infer<typeof categorySchema>;
+  parentCategories: { name: string; _id: number }[];
 }) {
   const [openDialog, setOpenDialog] = useState(false);
   const toggleDialog = () => setOpenDialog(false);
@@ -49,7 +51,7 @@ export default function AddUpdateCategory({
             Make changes to Update category.
           </DialogDescription>
         </DialogHeader>
-        <AddUpdateCategoryForm
+        <AddUpdateCategoryForm parentCategories={parentCategories}
           toggleDialog={toggleDialog}
           {...(categoryData && { categoryData })}
         />
