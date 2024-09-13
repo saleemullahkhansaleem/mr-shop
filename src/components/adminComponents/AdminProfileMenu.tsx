@@ -26,7 +26,7 @@ export default function AdminProfileMenu() {
         <Avatar className="cursor-pointer">
           {/* <AvatarImage src="/placeholder.svg" alt="Admin profile" /> */}
           <AvatarFallback className="text-sm">
-            {user?.name.slice(0, 2).toUpperCase()}
+            {user?.name?.slice(0, 2)?.toUpperCase()}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

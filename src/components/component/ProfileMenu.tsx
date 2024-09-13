@@ -18,17 +18,26 @@ import {
 import Link from "next/link";
 import Logout from "./Logout";
 import { Separator } from "../ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { useSelector } from "react-redux";
+import { Avatar, AvatarFallback } from "../ui/avatar";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { useEffect } from "react";
+import { getCookie } from "cookies-next";
+import { clearUser } from "@/features/userSlice";
 
 export default function ProfileMenu() {
+  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
-  console.log("user: ", user);
+  const role = getCookie("role");
+
+  useEffect(() => {
+    !role && dispatch(clearUser());
+  }, [role]);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {user?.isLoggedIn ? (
+        {user?.isLoggedIn && role ? (
           <Avatar className="cursor-pointer">
             {/* <AvatarImage src="/placeholder.svg" alt="Admin profile" /> */}
             <AvatarFallback className="text-sm">

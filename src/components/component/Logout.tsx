@@ -5,8 +5,11 @@ import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { api } from "@/helper/http";
 import { useToast } from "../ui/use-toast";
+import { useDispatch } from "react-redux";
+import { clearUser } from "@/features/userSlice";
 
 export default function Logout() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { toast } = useToast();
   const handleLogout = async () => {
@@ -15,12 +18,13 @@ export default function Logout() {
       if (response.success) {
         deleteCookie("token");
         deleteCookie("role");
+        dispatch(clearUser());
         router.replace("/login");
         toast({
           description: "Logout successfully",
         });
       } else {
-        throw new Error("Login failed");
+        throw new Error("LogOut failed");
       }
     } catch (error) {
       console.error(error);

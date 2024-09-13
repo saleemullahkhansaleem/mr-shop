@@ -58,6 +58,8 @@ export default async function CategoriesPage({
   }
 
   const categories = await fetchCategories();
+  const parentCategories = categories.map((cat: Category) => cat.name);
+  console.log("parent categories: ", parentCategories);
 
   const filteredCategories = categories?.filter(
     (category: Category) =>
