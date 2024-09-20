@@ -62,7 +62,6 @@ export default async function CategoriesPage({
     name: cat.name,
     _id: cat._id,
   }));
-  console.log("parent categories: ", parentCategories);
 
   const filteredCategories = categories?.filter(
     (category: Category) =>

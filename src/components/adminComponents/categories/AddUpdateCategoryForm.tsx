@@ -78,7 +78,7 @@ export default function AddUpdateCategoryForm({
 
   useEffect(() => {
     fetchParentCat();
-  }, [loading]);
+  }, []);
 
   const fetchParentCat = async () => {
     try {
@@ -265,7 +265,7 @@ export default function AddUpdateCategoryForm({
                       {parentCat.length === 0 ? (
                         <></>
                       ) : (
-                        parentCategories?.map((cat, i) => (
+                        parentCategories?.map((cat) => (
                           <SelectItem key={cat._id} value={cat._id?.toString()}>
                             {cat.name}
                           </SelectItem>

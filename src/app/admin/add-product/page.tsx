@@ -19,8 +19,8 @@ export default function AddProduct() {
           <CardTitle className="">Add New Product</CardTitle>
         </CardHeader>
         <CardContent className="">
-          <form className="grid md:grid-cols-2 gap-6">
-            <div className="grid gap-3">
+          <form className="grid md:grid-cols-12 gap-6">
+            <div className="grid gap-3 md:col-span-12">
               <Label htmlFor="title">Title</Label>
               <Input
                 id="title"
@@ -29,7 +29,7 @@ export default function AddProduct() {
                 placeholder="Enter product title"
               />
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-3 md:col-span-6">
               <Label htmlFor="category">Category</Label>
               <Select name="category">
                 <SelectTrigger className="w-full">
@@ -42,7 +42,20 @@ export default function AddProduct() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-3 md:col-span-6">
+              <Label htmlFor="category">Sub-Category</Label>
+              <Select name="category">
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select sub-category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="category1">Sub-Category 1</SelectItem>
+                  <SelectItem value="category2">Sub-Category 2</SelectItem>
+                  <SelectItem value="category3">Sub-Category 3</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-3 md:col-span-4">
               <Label htmlFor="price">Price</Label>
               <Input
                 id="price"
@@ -51,25 +64,19 @@ export default function AddProduct() {
                 placeholder="Enter product price"
               />
             </div>
-            <div className="grid gap-3">
-              <Label htmlFor="discountPercentage">Discount Percentage</Label>
-              <Input
-                id="discountPercentage"
-                type="number"
-                className="w-full"
-                placeholder="Enter discount percentage"
-              />
+            <div className="grid gap-3 md:col-span-4">
+              <Label htmlFor="discountPercentage">Discount</Label>
+              <div className="flex items-center gap-2">
+                <Input
+                  id="discountPercentage"
+                  type="number"
+                  className="w-full"
+                  placeholder="Enter discount percentage"
+                />
+                <span>%</span>
+              </div>
             </div>
-            <div className="grid gap-3">
-              <Label htmlFor="tags">Tags</Label>
-              <Input
-                id="tags"
-                type="text"
-                className="w-full"
-                placeholder="Enter product tags (comma-separated)"
-              />
-            </div>
-            <div className="grid gap-3">
+            <div className="grid gap-3 md:col-span-4">
               <Label htmlFor="stock">Stock</Label>
               <Input
                 id="stock"
@@ -78,15 +85,24 @@ export default function AddProduct() {
                 placeholder="Enter product stock"
               />
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-3 md:col-span-12">
+              <Label htmlFor="tags">Tags</Label>
+              <Input
+                id="tags"
+                type="text"
+                className="w-full"
+                placeholder="Enter product tags (comma-separated)"
+              />
+            </div>
+            <div className="grid gap-3 md:col-span-6">
               <Label htmlFor="images">Images</Label>
               <Input id="images" type="file" multiple />
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-3 md:col-span-6">
               <Label htmlFor="thumbnail">Thumbnail</Label>
               <Input id="thumbnail" type="file" />
             </div>
-            <div className="grid gap-3 md:col-span-2">
+            <div className="grid gap-3 md:col-span-12">
               <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
